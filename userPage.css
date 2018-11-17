@@ -153,12 +153,21 @@ header{
 .main-task{
   margin: 20px 0px 0px 0px;
   display: flex;
-  justify-content: space-between;
+  
   align-items: center;
 }
 
+.position_item{
+  display: flex;
+ 
+}
+
+/*.position_item div{
+  margin: 0 10px;
+}*/
+
 .task{
-  padding:5px 560px 5px 10px;
+  padding:5px 575px 5px 10px;
   background-color: #63948c;
   color: #fff;
   border-radius: 0px 14px 14px 0px;
@@ -169,6 +178,9 @@ header{
   background-color: #63948c;
   color: #fff;
   border-radius: 14px;
+  margin-right: 5px;
+  margin-left: 5px;
+  border:2px solid #63948c;
 }
 
 .priority{
@@ -176,6 +188,8 @@ header{
   background-color: #63948c;
   color: #fff;
   border-radius: 14px;
+  margin-right: 5px;
+  border:2px solid #63948c;
 }
 
 .status{
@@ -185,6 +199,7 @@ header{
   color: #fff;
   border-radius: 14px;
   white-space: nowrap;
+  border:2px solid #63948c;
 }
 
 .main-sprint{
@@ -193,11 +208,11 @@ header{
 
 .sprint-task{
   word-break: break-all;
-  padding:5px 100px 5px 10px;
-  background-color: #c4c4c4;
+  padding:5px 30px 5px 5px;
+  background-color: #CDDBFF;
   color: #565762;
   border-radius: 0px 14px 14px 0px;
-  min-width: 400px;
+  min-width: 476px;
 
   /* padding:5px 10px 5px 10px;
   background-color: #c4c4c4;
@@ -220,6 +235,7 @@ header{
   color: #fff;
   border-radius: 14px;
   border:none;
+  margin-right: 5px;
 }
 
 .sprint-status{
@@ -227,7 +243,27 @@ header{
   background-color: black;
   color: #fff;
   border-radius: 14px;
+  margin-right: 5px;
 }
+
+.bg_person{
+  background-color: white;
+  color: #63948c;
+  border:2px solid  #63948c;
+}
+
+.bg_priority{
+  background-color: white;
+  color: #63948c;
+  border:2px solid  #63948c;
+}
+
+.bg_task{
+    background-color: white;
+  color: #63948c;
+  border:2px solid  #63948c;
+}
+
 .sprint-priority {
   position: relative;
 }
@@ -306,20 +342,27 @@ input[value="AddToDB"]{
   justify-content: flex-start;
   align-items: center;
   cursor: pointer;
+  padding: 5px 0;
 }
 
  .content{
   display: none;
 } 
 
-.ptroductContainer{
-  padding-top: 100px;
-  display: flex;
-  justify-content: space-around;
-  margin: 0 auto;
-  width: 1140px;
+ .add_task{
+  margin-top: 15px;
+  margin-right: 15px;
 }
 
-.productItem{
-  padding: 100px 50px;
+.input_dotted{
+  width: 100%;
+  border: 2px dashed #939393;
+}
+
+.del_task{
+  margin: 0 45px;
+}
+
+.enterHandler{
+  margin-right: 1px;
 }

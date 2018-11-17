@@ -7,86 +7,60 @@
     <meta charset="UTF-8" />
     <title>SoftLogic</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="userPage.css" />
-    <link rel="stylesheet" type="text/css" href="Media/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="UserPage.css" />
+    <link rel="stylesheet" type="text/css" href="normalize.css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 </head>
 
 <script type="text/javascript">
-
     var priority_Node = null;
     var status_Node = null;
     var spanId = 1;
     var lastId = 0;
-
     $(document).mouseup(function () {
         if (showPriorityFlag) {
             $('#priority-container').fadeOut(300);
             showPriorityFlag = false;
         }
-
         if (showStatusFlag) {
             $('#status-container').fadeOut(300);
             showStatusFlag = false;
         }
     });
-
     window.onload = function () {
-
         //   SoftLogic.UserTaskDB.GetSaveUserTask(onComplete, onError);
-
         $('#newTaskText').keyup(function (event) {
             if (event.keyCode === 13) {
                 $('#enterHandler').click();
             }
         });
-
-
         var content = $('.activeContent .content').html();
         $('.activeContent .content').empty();
         $('#content').html(content);
-
-
         $('.item').click(function () {
-
             var ChangeContent = $('#content').html();
-
             $('.activeContent .content').html(ChangeContent);
-
             $('.item').removeClass('activeContent');
             $(this).addClass('activeContent');
-
             content = $('.activeContent .content').html();
-            
-           $('.activeContent .content').empty();     
 
+            $('.activeContent .content').empty();
             $('#content').html(content);
-
         });
     }
-
     function AddInDB() {
         var taskText = document.getElementById('newTaskText').value;
         AddTaskInContainer(taskText, lastId + 1, false);
     }
-
     var showStatusFlag = false;
-
     var parent_Id_status;
-
     function setStatus(statusDiv) {
-
         if (!showStatusFlag) {
-
             status_Node = statusDiv;
-
             var statusContainer = document.getElementById('status-container');
             var positionStatus = statusDiv.getBoundingClientRect();
-
-
             statusContainer.style.left = positionStatus.left + -15 + 'px';
             statusContainer.style.top = positionStatus.top + 25 + 'px';
-
             $('#status-container').fadeIn(300);
             showStatusFlag = true;
         }
@@ -94,41 +68,29 @@
             status_Node = null;
         }
     }
-
     var showPriorityFlag = false;
-
     function setPriority(priorityDiv) {
-
         if (!showPriorityFlag) {
-
             var priorityContainer = document.getElementById('priority-container');
             var positionPriority = priorityDiv.getBoundingClientRect();
-
             priority_Node = priorityDiv;
-
             priorityContainer.style.left = positionPriority.left + -20 + 'px';
             priorityContainer.style.top = positionPriority.top + 20 + 'px';
-
             $('#priority-container').fadeIn(300);
-
             showPriorityFlag = true;
         }
         else {
             priority_Node = null;
         }
     }
-
     function AddTaskInContainer(taskText, TaskId, saveFlag) {
         if (taskText) {
             lastId = TaskId;
             var readyTampleteTask = document.getElementsByClassName('filledTask')[0].cloneNode(true);
             readyTampleteTask.setAttribute('id', TaskId);
-
             document.getElementById('taskContainer').appendChild(readyTampleteTask);
             document.getElementsByClassName('taskText')[spanId].innerHTML = taskText;
-
             $('#' + TaskId).fadeIn(300);
-
             if (saveFlag) {
                 //  SoftLogic.UserTaskDB.AddNewTask(taskText, TaskId, onComplete, onError);
             }
@@ -136,17 +98,11 @@
             document.getElementById('newTaskText').value = null;
         }
     }
-
-
-
     function DeleteTask(delTask) {
-
         var del_parentNode = delTask.parentNode.id;
-
         $('#' + del_parentNode).fadeOut(300);
         //  SoftLogic.UserTaskDB.DeleteTask(delTask.parentNode.id, onComplete, onError);
     }
-
     function onComplete(result) {
         if (result) {
             for (var i in result) {
@@ -156,77 +112,66 @@
         }
         console.log(result);
     }
-
     function onError(error) {
         alert(error._massege);
     }
-
     var priorityObj = {
-
         highest: "#c24332",
         high: "#ff7664",
         low: "#3add7c",
         lowest: "2b7a4d",
-
         highest_click: function () {
             if (priority_Node) {
                 priority_Node.innerHTML = 'highest';
                 priority_Node.style.backgroundColor = '#c24332';
+                priority_Node.style.color = 'white';
             }
         },
-
         high_Click: function () {
             if (priority_Node) {
                 priority_Node.innerHTML = 'high';
                 priority_Node.style.backgroundColor = '#ff7664';
+                priority_Node.style.color = 'white';
             }
         },
-
         low_Click: function () {
             if (priority_Node) {
                 priority_Node.innerHTML = 'low';
                 priority_Node.style.backgroundColor = '#3add7c';
+                priority_Node.style.color = 'white';
             }
         },
-
         lowest_Click: function () {
             if (priority_Node) {
                 priority_Node.innerHTML = 'lowest';
                 priority_Node.style.backgroundColor = '#2b7a4d';
+                priority_Node.style.color = 'white';
             }
         }
-
     }
-
     var statusObj = {
-
         stopped: "#c24332",
         ['in process']: "#e67e22",
         complete: "#2ecc71",
-
         stoppped_click: function () {
             if (status_Node) {
                 status_Node.innerHTML = 'stopped';
                 status_Node.style.backgroundColor = '#c24332';
             }
         },
-
         in_process_Click: function () {
             if (status_Node) {
                 status_Node.innerHTML = 'in process';
                 status_Node.style.backgroundColor = '#e67e22';
             }
         },
-
         complete_Click: function () {
             if (status_Node) {
                 status_Node.innerHTML = 'complete';
                 status_Node.style.backgroundColor = '#2ecc71';
             }
         }
-
     }
-
 </script>
 
 <body>
@@ -281,13 +226,16 @@
                                 </div>
                                 <section>
                                     <div class="main-task filledTask" style="display: none;">
-                                        <input type="button" value="del" onclick="DeleteTask(this)">
+                                        <input type="button" id="del_task" value="del" onclick="DeleteTask(this)" style="display: none;">
+                                        <label for="del_task"><img class="del_task" src="del_task.png"></label>
                                         <div class="sprint-task">
                                             <span class="taskText" style="width: 100px;"></span>
                                         </div>
-                                        <div class="person">Person</div>
-                                        <div class="sprint-priority" onclick="setPriority(this)">Add</div>
-                                        <div class="status" onclick="setStatus(this)">Add</div>
+                                        <div class="position_item">
+                                            <div class="person bg_person">Person</div>
+                                            <div class="sprint-priority bg_priority" onclick="setPriority(this)">Add</div>
+                                            <div class="status bg_task" onclick="setStatus(this)">Add</div>
+                                        </div>
                                     </div>
 
                                     <div class="main-sprint">
@@ -296,17 +244,23 @@
                                         </div>
 
                                         <div class="main-task" id="userTask" style="display: none; ">
-                                            <input value="AddToDB" id="enterHandler" onclick="AddInDB()" type="button">
+                                            <input value="AddToDB" id="enterHandler" onclick="AddInDB()" type="button"
+                                                style="display: none;">
+                                            <label for="enterHandler"><img class="enterHandler" src="add_task.png"></label>
                                             <div class="sprint-task">
-                                                <input id="newTaskText" type="text">
+                                                <input id="newTaskText" type="text" class="input_dotted">
                                             </div>
                                             <div class="person">Person</div>
                                             <div class="sprint-priority">Priority</div>
                                             <div class="status">Status</div>
                                         </div>
 
-                                        <input type="button" id="addTask" onclick="$('#userTask').fadeIn(300)" value="AddTask" />
-                                        <input type="button" onclick="$('#userTask').fadeOut(300);" value="Cancel" />
+                                        <input type="button" id="addTask" onclick="$('#userTask').fadeIn(300)" value="AddTask"
+                                            style="display: none;" />
+                                        <label for="addTask"><img class="add_task" src="add_task.png"></label>
+                                        <input type="button" id="cancel_task" onclick="$('#userTask').fadeOut(300);"
+                                            value="Cancel" style="display: none;" />
+                                        <label for="cancel_task"><img src="cancel_task.png"></label>
                                     </div>
                                 </section>
                             </div>
@@ -314,11 +268,7 @@
                     </a>
                     <a href="#" class="item">
                         <li>Sprint Backlog</li>
-                        <div class="content"><div class="ptroductContainer">
-                            <div style="background-color: #2b7a4d" class="productItem">ToDo</div>
-                            <div style="background-color:#3add7c" class="productItem">INProcess</div>
-                            <div style="background-color: #c24332" class="productItem">Done</div>
-                        </div></div>
+                        <div class="content">Sprint Backlog</div>
                     </a>
 
                     <a href="#" class="item">
