@@ -312,3 +312,14 @@ input[value="AddToDB"]{
   display: none;
 } 
 
+.ptroductContainer{
+  padding-top: 100px;
+  display: flex;
+  justify-content: space-around;
+  margin: 0 auto;
+  width: 1140px;
+}
+
+.productItem{
+  padding: 100px 50px;
+}
