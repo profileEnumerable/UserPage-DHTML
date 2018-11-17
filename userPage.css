@@ -1,0 +1,314 @@
+body{
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+header{
+  background-color: #63948c;
+  padding: 20px 0px;
+}
+
+.header-main{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-logo span{
+  font-size: 40px;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.header-user{
+  display: flex;
+  align-items: center;
+}
+
+.header-link{
+  flex-direction: column;
+  text-align:center;
+}
+
+.header-link a{
+  text-decoration: none;
+  color: #93b1ac;
+  padding: 0px 7px;
+}
+
+.header-link a:hover{
+  color: #ccd2d1;
+}
+
+.header-user-photo{
+  background-color: #ebe6d1;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+
+.hidden-menu {
+  display: block;
+  position: fixed;
+  list-style:none;
+  padding: 0px;
+  margin: 0;
+  box-sizing: border-box;
+  width: 200px;
+  background-color: #f5f2e8;
+  height: 100%;
+  top: 150px;
+  left: -200px;
+  transition: left .2s;
+  z-index: 2;
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+}
+
+.hidden-menu-ticker {
+  display: none;
+}
+
+.btn-menu {
+  color: #fff;
+  background-color: #63948c;
+  padding: 5px;
+  position: fixed;
+  top: 160px;
+  left: 50px;
+  cursor: pointer;
+  transition: left .23s;
+  z-index: 3;
+  width: 25px;
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+}
+.btn-menu span {
+  display: block;
+  height: 5px;
+  background-color: #fff;
+  margin: 5px 0 0;
+  transition: all .1s linear .23s;
+  position: relative;
+}
+
+.hidden-menu li{
+  padding: 18px 42px;
+  width: 117px;
+}
+
+.hidden-menu li:hover{
+  background-color:#63948c;
+}
+
+.hidden-menu a{
+  text-decoration:none;
+  color: #000000;
+}
+
+.hidden-menu a:hover{
+  color: #ffffff;
+}
+
+.btn-menu span.first {
+  margin-top: 0;
+}
+
+.hidden-menu-ticker:checked ~ .btn-menu {
+  left: 160px;
+}
+.hidden-menu-ticker:checked ~ .hidden-menu {
+  left: 0;
+}
+.hidden-menu-ticker:checked ~ .btn-menu span.first {
+  -webkit-transform: rotate(45deg);
+  top: 10px;
+}
+.hidden-menu-ticker:checked ~ .btn-menu span.second {
+  opacity: 0;
+}
+.hidden-menu-ticker:checked ~ .btn-menu span.third {
+  -webkit-transform: rotate(-45deg);
+  top: -10px;
+}
+
+.main{
+      padding: 50px 0px 0px 110px;
+}
+
+.main-task{
+  margin: 20px 0px 0px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task{
+  padding:5px 560px 5px 10px;
+  background-color: #63948c;
+  color: #fff;
+  border-radius: 0px 14px 14px 0px;
+}
+
+.person{
+  padding:5px 40px;
+  background-color: #63948c;
+  color: #fff;
+  border-radius: 14px;
+}
+
+.priority{
+  padding: 5px 40px;
+  background-color: #63948c;
+  color: #fff;
+  border-radius: 14px;
+}
+
+.status{
+  width: 50px;
+  padding: 5px 40px;
+  background-color: #63948c;
+  color: #fff;
+  border-radius: 14px;
+  white-space: nowrap;
+}
+
+.main-sprint{
+      padding: 30px 0px 0px 110px;
+}
+
+.sprint-task{
+  word-break: break-all;
+  padding:5px 100px 5px 10px;
+  background-color: #c4c4c4;
+  color: #565762;
+  border-radius: 0px 14px 14px 0px;
+  min-width: 400px;
+
+  /* padding:5px 10px 5px 10px;
+  background-color: #c4c4c4;
+  color: #565762;
+  border-radius: 0px 14px 14px 0px;
+  word-break: break-all; */
+}
+
+.sprint-person{
+  padding:5px 40px;
+  background-color: #63948c;
+  color: #fff;
+  border-radius: 14px;
+}
+
+.sprint-priority{
+  width: 50px;
+  padding: 5px 40px;
+  background-color: #63948c;
+  color: #fff;
+  border-radius: 14px;
+  border:none;
+}
+
+.sprint-status{
+  padding: 5px 40px;
+  background-color: black;
+  color: #fff;
+  border-radius: 14px;
+}
+.sprint-priority {
+  position: relative;
+}
+
+#btn-container {
+display: none;
+}
+#btn-container.active{
+display: block;
+}
+#btn-container {
+  background: yellow;
+  position: absolute;
+  top: 100%;
+}
+#btn-container span {
+  display: block;
+}
+.btn-red {
+  background: red;
+}
+.btn-green {
+  background: green;
+}
+.btn-blue {
+  background: blue;
+}
+
+.yura{
+  width: 500px;
+  height: 50px;
+  resize: none;
+}
+
+.width-input{
+  min-width: 100px;
+}
+
+input[value="AddToDB"]{
+  width: 35px; 
+}
+
+.filledTask{
+  margin: 10px 0px 10px 0;
+}
+
+.status-button{
+  margin: 5px;
+  padding: 5px 0px 0px 0px;
+  text-align: center;
+  color: white;
+  width: 130px;
+  height: 25px;
+  border-radius: 14px;
+}
+
+
+.task-settings{
+  border-radius: 5px;
+  width: 135px;
+  margin:10px;
+  padding:5px;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0,0,0,.32);
+  font-family: Arial, sans-serif;
+  font-size: 17px;
+}
+
+.design span{
+  display: block;
+  margin: 0 10px;
+}
+
+.design{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+}
+
+ .content{
+  display: none;
+} 
+
