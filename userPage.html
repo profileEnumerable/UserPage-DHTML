@@ -10,177 +10,16 @@
     <link rel="stylesheet" type="text/css" href="UserPage.css" />
     <link rel="stylesheet" type="text/css" href="normalize.css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="userPageLogic.js"> </script>
 </head>
-
-<script type="text/javascript">
-    var priority_Node = null;
-    var status_Node = null;
-    var spanId = 1;
-    var lastId = 0;
-    $(document).mouseup(function () {
-        if (showPriorityFlag) {
-            $('#priority-container').fadeOut(300);
-            showPriorityFlag = false;
-        }
-        if (showStatusFlag) {
-            $('#status-container').fadeOut(300);
-            showStatusFlag = false;
-        }
-    });
-    window.onload = function () {
-        //   SoftLogic.UserTaskDB.GetSaveUserTask(onComplete, onError);
-        $('#newTaskText').keyup(function (event) {
-            if (event.keyCode === 13) {
-                $('#enterHandler').click();
-            }
-        });
-        var content = $('.activeContent .content').html();
-        $('.activeContent .content').empty();
-        $('#content').html(content);
-        $('.item').click(function () {
-            var ChangeContent = $('#content').html();
-            $('.activeContent .content').html(ChangeContent);
-            $('.item').removeClass('activeContent');
-            $(this).addClass('activeContent');
-            content = $('.activeContent .content').html();
-
-            $('.activeContent .content').empty();
-            $('#content').html(content);
-        });
-    }
-    function AddInDB() {
-        var taskText = document.getElementById('newTaskText').value;
-        AddTaskInContainer(taskText, lastId + 1, false);
-    }
-    var showStatusFlag = false;
-    var parent_Id_status;
-    function setStatus(statusDiv) {
-        if (!showStatusFlag) {
-            status_Node = statusDiv;
-            var statusContainer = document.getElementById('status-container');
-            var positionStatus = statusDiv.getBoundingClientRect();
-            statusContainer.style.left = positionStatus.left + -15 + 'px';
-            statusContainer.style.top = positionStatus.top + 25 + 'px';
-            $('#status-container').fadeIn(300);
-            showStatusFlag = true;
-        }
-        else {
-            status_Node = null;
-        }
-    }
-    var showPriorityFlag = false;
-    function setPriority(priorityDiv) {
-        if (!showPriorityFlag) {
-            var priorityContainer = document.getElementById('priority-container');
-            var positionPriority = priorityDiv.getBoundingClientRect();
-            priority_Node = priorityDiv;
-            priorityContainer.style.left = positionPriority.left + -20 + 'px';
-            priorityContainer.style.top = positionPriority.top + 20 + 'px';
-            $('#priority-container').fadeIn(300);
-            showPriorityFlag = true;
-        }
-        else {
-            priority_Node = null;
-        }
-    }
-    function AddTaskInContainer(taskText, TaskId, saveFlag) {
-        if (taskText) {
-            lastId = TaskId;
-            var readyTampleteTask = document.getElementsByClassName('filledTask')[0].cloneNode(true);
-            readyTampleteTask.setAttribute('id', TaskId);
-            document.getElementById('taskContainer').appendChild(readyTampleteTask);
-            document.getElementsByClassName('taskText')[spanId].innerHTML = taskText;
-            $('#' + TaskId).fadeIn(300);
-            if (saveFlag) {
-                //  SoftLogic.UserTaskDB.AddNewTask(taskText, TaskId, onComplete, onError);
-            }
-            spanId++;
-            document.getElementById('newTaskText').value = null;
-        }
-    }
-    function DeleteTask(delTask) {
-        var del_parentNode = delTask.parentNode.id;
-        $('#' + del_parentNode).fadeOut(300);
-        //  SoftLogic.UserTaskDB.DeleteTask(delTask.parentNode.id, onComplete, onError);
-    }
-    function onComplete(result) {
-        if (result) {
-            for (var i in result) {
-                console.log(i + " " + result[i]);
-                AddTaskInContainer(result[i], i, false);
-            }
-        }
-        console.log(result);
-    }
-    function onError(error) {
-        alert(error._massege);
-    }
-    var priorityObj = {
-        highest: "#c24332",
-        high: "#ff7664",
-        low: "#3add7c",
-        lowest: "2b7a4d",
-        highest_click: function () {
-            if (priority_Node) {
-                priority_Node.innerHTML = 'highest';
-                priority_Node.style.backgroundColor = '#c24332';
-                priority_Node.style.color = 'white';
-            }
-        },
-        high_Click: function () {
-            if (priority_Node) {
-                priority_Node.innerHTML = 'high';
-                priority_Node.style.backgroundColor = '#ff7664';
-                priority_Node.style.color = 'white';
-            }
-        },
-        low_Click: function () {
-            if (priority_Node) {
-                priority_Node.innerHTML = 'low';
-                priority_Node.style.backgroundColor = '#3add7c';
-                priority_Node.style.color = 'white';
-            }
-        },
-        lowest_Click: function () {
-            if (priority_Node) {
-                priority_Node.innerHTML = 'lowest';
-                priority_Node.style.backgroundColor = '#2b7a4d';
-                priority_Node.style.color = 'white';
-            }
-        }
-    }
-    var statusObj = {
-        stopped: "#c24332",
-        ['in process']: "#e67e22",
-        complete: "#2ecc71",
-        stoppped_click: function () {
-            if (status_Node) {
-                status_Node.innerHTML = 'stopped';
-                status_Node.style.backgroundColor = '#c24332';
-            }
-        },
-        in_process_Click: function () {
-            if (status_Node) {
-                status_Node.innerHTML = 'in process';
-                status_Node.style.backgroundColor = '#e67e22';
-            }
-        },
-        complete_Click: function () {
-            if (status_Node) {
-                status_Node.innerHTML = 'complete';
-                status_Node.style.backgroundColor = '#2ecc71';
-            }
-        }
-    }
-</script>
 
 <body>
     <form id="form1" runat="server">
-        <asp:ScriptManager runat="server">
+        <!-- <asp:ScriptManager runat="server">
             <Services>
                 <asp:ServiceReference Path="~/UserTaskDB.asmx" />
             </Services>
-        </asp:ScriptManager>
+        </asp:ScriptManager> -->
 
         <header>
             <div class="container">
@@ -226,8 +65,8 @@
                                 </div>
                                 <section>
                                     <div class="main-task filledTask" style="display: none;">
-                                        <input type="button" id="del_task" value="del" onclick="DeleteTask(this)" style="display: none;">
-                                        <label for="del_task"><img class="del_task" src="del_task.png"></label>
+                                        <input type="button" id="del_task" value="del" style="display: none;">
+                                        <label for="del_task" onclick="DeleteTask(this)"><img class="del_task" src="del_task.png"></label>
                                         <div class="sprint-task">
                                             <span class="taskText" style="width: 100px;"></span>
                                         </div>
@@ -268,7 +107,13 @@
                     </a>
                     <a href="#" class="item">
                         <li>Sprint Backlog</li>
-                        <div class="content">Sprint Backlog</div>
+                        <div class="content">
+                            <div class="productContainer">
+                                <div style="background-color: #2b7a4d" class="productItem">ToDo</div>
+                                <div style="background-color:#3add7c" class="productItem">INProcess</div>
+                                <div style="background-color: #c24332" class="productItem">Done</div>
+                            </div>
+                        </div>
                     </a>
 
                     <a href="#" class="item">
@@ -299,26 +144,25 @@
             </section>
 
             <div id="status-container" class="task-settings" style="display: none; position: absolute; top: 0;">
-                <div class="status-button design" onclick="statusObj.stoppped_click()" style="background-color:#c24332;">
+                <div class="status-button design" style="background-color:#c24332;">
                     <span><img src="stopped.png"></span>stopped</div>
-                <div class="status-button design" onclick="statusObj.in_process_Click()" style="background-color:  #e67e22;"><span><img
+                <div class="status-button design" style="background-color:  #e67e22;"><span><img
                             src="in process.png">inprocess</div>
-                <div class="status-button design" onclick="statusObj.complete_Click()" style="background-color:  #2ecc71;"><span><img
+                <div class="status-button design" style="background-color:  #2ecc71;"><span><img
                             src="complete.png">complete</div>
             </div>
 
             <div id="priority-container" class="task-settings" style="display:none; position: absolute;">
-                <div class="status-button design" onclick="priorityObj.highest_click()" style="background-color:  #c24332; "><span><img
+                <div class="status-button design" style="background-color:  #c24332; "><span><img
                             src="highest.png"></span>highest</div>
-                <div class="status-button design" onclick="priorityObj.high_Click()" style="background-color:  #ff7664;"><span><img
+                <div class="status-button design" style="background-color:  #ff7664;"><span><img
                             src="high.png"></span>high</div>
-                <div class="status-button design" onclick="priorityObj.low_Click()" style="background-color:  #3add7c;"><span><img
+                <div class="status-button design" style="background-color:  #3add7c;"><span><img
                             src="low.png"></span>low</div>
-                <div class="status-button design" onclick="priorityObj.lowest_Click()" style="background-color:  #2b7a4d;"><span><img
+                <div class="status-button design" style="background-color:  #2b7a4d;"><span><img
                             src="lowest.png"></span>lowest</div>
             </div>
         </main>
     </form>
 </body>
-
 </html>

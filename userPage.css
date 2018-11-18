@@ -360,9 +360,23 @@ input[value="AddToDB"]{
 }
 
 .del_task{
+  cursor: pointer;
   margin: 0 45px;
 }
 
 .enterHandler{
   margin-right: 1px;
+}
+
+.productContainer{
+  width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+.productItem{
+  margin-top: 100px;
+  padding: 100px 50px;
+
 }
