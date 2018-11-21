@@ -1,11 +1,9 @@
-
-
-
-
 var priority_Node = null;
 var status_Node = null;
 var spanId = 1;
 var lastId = 0;
+
+
 
 $(document).mouseup(function () {
     if (showPriorityFlag) {
@@ -21,7 +19,6 @@ $(document).mouseup(function () {
 window.onload = function () {
     //   SoftLogic.UserTaskDB.GetSaveUserTask(onComplete, onError);
 
-
     var content = $('.activeContent .content').html();
     $('.activeContent .content').empty();
     $('#content').html(content);
@@ -35,6 +32,18 @@ window.onload = function () {
 
         $('.activeContent .content').empty();
         $('#content').html(content);
+
+        $('#draggUserItem').draggable();
+
+        $('.droppUserItem').droppable({
+            drop: function () {
+                
+                var dragElemt = document.getElementById('draggUserItem');
+
+
+            }
+        });
+
     });
 
     $('.design').click(function () {
@@ -59,6 +68,12 @@ window.onload = function () {
             $('#enterHandler').click();
         }
     });
+
+
+    $('#sprintBackActive').click(function () {
+
+    });
+
 }
 
 function AddInDB() {

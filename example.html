@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.js"></script>
+    <meta charset="utf-8">
+    <title>draggable demo</title>
+    <style>
+        .draggable {
+            position: relative;
+            text-align: center;
+            width: 5em;
+            padding: 10px;
+            border: thin solid black;
+            font-size: x-large;
+        }
+
+
+        .drop {
+            padding: 20px;
+            top: 100px;
+            margin: 0 auto;
+        }
+
+        #parent {
+            width: 400px;
+            height: 500px;
+            border: medium double black;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="parent">
+        <div class="drop draggable" class="ui-widget ui-corner-all ui-state-error" style="background-color: brown">Drop</div>
+        <div class="drag draggable" class="ui-widget ui-corner-all ui-state-error" style="background-color: cornflowerblue">UserTask1</div>
+    </div>
+    <script>
+
+        $(function () {
+
+            $(".drag").draggable({
+
+                start: function () { $('.dragX').text('In process') }
+                ,
+                stop: function () { $('.dragX').text('stop') }
+            })
+
+            $('.drop').droppable({
+
+                drop: function () {
+
+                    var dragElement = document.getElementsByClassName('drag')[0];
+
+                    dragElement.style.left = this.getBoundingClientRect().left + 'px';
+                    dragElement.style.top = 40 + 'px';
+                    
+                }
+            })
+        })
+
+    </script>
+
+</body>
+
+</html>
