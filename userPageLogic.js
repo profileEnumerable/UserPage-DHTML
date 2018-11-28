@@ -19,32 +19,86 @@ $(document).mouseup(function () {
 window.onload = function () {
     //   SoftLogic.UserTaskDB.GetSaveUserTask(onComplete, onError);
 
+    var viewSection = $('#content');
+
     var content = $('.activeContent .content').html();
     $('.activeContent .content').empty();
-    $('#content').html(content);
+    viewSection.html(content);
 
     $('.item').click(function () {
-        var ChangeContent = $('#content').html();
+        var ChangeContent = viewSection.html();
         $('.activeContent .content').html(ChangeContent);
         $('.item').removeClass('activeContent');
         $(this).addClass('activeContent');
         content = $('.activeContent .content').html();
 
         $('.activeContent .content').empty();
-        $('#content').html(content);
+        viewSection.html(content);
 
-        $('#draggUserItem').draggable();
+        if (viewSection.children('.productContainer').length > 0) {
+            AddDragDrop();
+        }
+    });
+
+    function ResetPosition(obj) {
+        obj.style.left = 0;
+        obj.style.top = 0;
+
+        obj.style.zIndex = '0';
+
+        for (let index = 0; index < 2; index++) {
+            $('.overlayDiv')[0].remove();
+        }
+    }
+
+    function AddDragDrop() {
+        var draggUserTask;
+
+
+        $('.draggUserItem').draggable(
+            {
+                stop: function () {
+                    ResetPosition(this);
+                }
+                ,
+                start: function () {
+                    this.style.backgroundColor = 'green';
+
+                    this.style.zIndex = '200';
+
+                    for (let index = 0; index < 3; index++) {
+                        var dropContainer = document.getElementsByClassName('droppUserItem')[index];
+
+                        if (!dropContainer.contains(this)) {
+                            var overlayDiv = document.createElement('div');
+
+                            overlayDiv.setAttribute('class', "overlayDiv");
+
+                            dropContainer.appendChild(overlayDiv);
+                            console.log(1);
+                        }
+                    }
+
+                },
+
+                drag: function () { draggUserTask = this }
+            }
+        );
 
         $('.droppUserItem').droppable({
             drop: function () {
-                
-                var dragElemt = document.getElementById('draggUserItem');
+                this.appendChild(draggUserTask);
+            },
 
+            over: function () {
+                var overlayDiv = this.getElementsByClassName('overlayDiv')[0];
 
             }
-        });
 
-    });
+
+        });
+    }
+
 
     $('.design').click(function () {
 
@@ -68,12 +122,6 @@ window.onload = function () {
             $('#enterHandler').click();
         }
     });
-
-
-    $('#sprintBackActive').click(function () {
-
-    });
-
 }
 
 function AddInDB() {
@@ -145,9 +193,11 @@ function onComplete(result) {
     }
     console.log(result);
 }
+
 function onError(error) {
     alert(error._massege);
 }
+
 var priorityObj = {
     highest: "#c24332",
     high: "#ff7664",
@@ -159,4 +209,3 @@ var statusObj = {
     ['in process']: "#e67e22",
     complete: "#2ecc71",
 }
-
