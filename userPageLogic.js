@@ -3,8 +3,6 @@ var status_Node = null;
 var spanId = 1;
 var lastId = 0;
 
-
-
 $(document).mouseup(function () {
     if (showPriorityFlag) {
         $('#priority-container').fadeOut(300);
@@ -17,7 +15,7 @@ $(document).mouseup(function () {
 });
 
 window.onload = function () {
-    //   SoftLogic.UserTaskDB.GetSaveUserTask(onComplete, onError);
+    // SoftLogic.UserTaskDB.GetSaveUserTask(onComplete, onError);
 
     var viewSection = $('#content');
 
@@ -54,7 +52,6 @@ window.onload = function () {
     function AddDragDrop() {
         var draggUserTask;
 
-
         $('.draggUserItem').draggable(
             {
                 stop: function () {
@@ -62,7 +59,6 @@ window.onload = function () {
                 }
                 ,
                 start: function () {
-                    this.style.backgroundColor = 'green';
 
                     this.style.zIndex = '200';
 
@@ -75,15 +71,15 @@ window.onload = function () {
                             overlayDiv.setAttribute('class', "overlayDiv");
 
                             dropContainer.appendChild(overlayDiv);
-                            console.log(1);
+
                         }
                     }
-
                 },
-
-                drag: function () { draggUserTask = this }
+                drag: function () { draggUserTask = this; }
             }
         );
+
+        var overlayDiv;
 
         $('.droppUserItem').droppable({
             drop: function () {
@@ -91,19 +87,28 @@ window.onload = function () {
             },
 
             over: function () {
-                var overlayDiv = this.getElementsByClassName('overlayDiv')[0];
 
+                overlayDiv = this.getElementsByClassName('overlayDiv')[0];
+
+                if (overlayDiv !== undefined) {
+                    overlayDiv.style.backgroundColor = '#f3f9f4'
+                    overlayDiv.style.border = '3px dashed #14892c';
+                }
+            },
+
+            out: function () {
+                if (overlayDiv !== undefined) {
+                    overlayDiv.style.backgroundColor = '';
+                    overlayDiv.style.border = '';
+                }
             }
-
-
         });
     }
 
 
     $('.design').click(function () {
 
-
-        if (this.parentNode.id == 'priority-container') {
+        if (this.parentNode.id === 'priority-container') {
             priority_Node.style.color = 'white';
             priority_Node.innerHTML = this.innerText || this.textContent;
             priority_Node.style.backgroundColor = this.style.backgroundColor;
@@ -113,11 +118,9 @@ window.onload = function () {
             status_Node.innerHTML = this.innerText || this.textContent;
             status_Node.style.backgroundColor = this.style.backgroundColor;
         }
-
     });
 
     $('.input_dotted').keyup(function (event) {
-
         if (event.keyCode === 13) {
             $('#enterHandler').click();
         }
@@ -126,11 +129,15 @@ window.onload = function () {
 
 function AddInDB() {
     var taskText = document.getElementById('newTaskText').value;
-    AddTaskInContainer(taskText, lastId + 1, false);
+
+    var taskObj = { TaskText: taskText, Id: lastId + 1 };
+
+    AddTaskInContainer(taskObj, true);
 }
 
 var showStatusFlag = false;
 var parent_Id_status;
+
 function setStatus(statusDiv) {
     if (!showStatusFlag) {
         status_Node = statusDiv;
@@ -147,6 +154,7 @@ function setStatus(statusDiv) {
 }
 
 var showPriorityFlag = false;
+
 function setPriority(priorityDiv) {
     if (!showPriorityFlag) {
         var priorityContainer = document.getElementById('priority-container');
@@ -162,16 +170,38 @@ function setPriority(priorityDiv) {
     }
 }
 
-function AddTaskInContainer(taskText, TaskId, saveFlag) {
-    if (taskText) {
-        lastId = TaskId;
-        var readyTampleteTask = document.getElementsByClassName('filledTask')[0].cloneNode(true);
-        readyTampleteTask.setAttribute('id', TaskId);
+function SetPriorityStatus(sourseContent, classItem, taskObj, nameProp) {
+
+    var text = Object.keys(sourseContent)[taskObj[nameProp]];
+    var obj = readyTampleteTask.getElementsByClassName(classItem)[0];
+
+    if (text) {
+        obj.innerHTML = text;
+        obj.style.backgroundColor = sourseContent[text];
+        obj.style.color = 'white';
+    }
+}
+
+var readyTampleteTask;
+
+function AddTaskInContainer(taskObj, saveFlag) {
+
+    if (taskObj.TaskText) {
+
+        lastId = taskObj.TaskId;
+        readyTampleteTask = document.getElementsByClassName('filledTask')[0].cloneNode(true);
+        readyTampleteTask.setAttribute('id', taskObj.TaskId);
+
         document.getElementById('taskContainer').appendChild(readyTampleteTask);
-        document.getElementsByClassName('taskText')[spanId].innerHTML = taskText;
-        $('#' + TaskId).fadeIn(300);
+        document.getElementsByClassName('taskText')[spanId].innerHTML = taskObj.TaskText;
+
+        SetPriorityStatus(priorityObj, 'sprint-priority', taskObj, 'PriorityId');
+        SetPriorityStatus(statusObj, 'status', taskObj, 'StatusId');
+
+        $('#' + taskObj.TaskId).fadeIn(300);
+
         if (saveFlag) {
-            //  SoftLogic.UserTaskDB.AddNewTask(taskText, TaskId, onComplete, onError);
+            SoftLogic.UserTaskDB.AddNewTask(taskText, TaskId, onComplete, onError);
         }
         spanId++;
         document.getElementById('newTaskText').value = null;
@@ -181,17 +211,15 @@ function AddTaskInContainer(taskText, TaskId, saveFlag) {
 function DeleteTask(delTask) {
     var del_parentNode = delTask.parentNode.id;
     $('#' + del_parentNode).fadeOut(300);
-    //  SoftLogic.UserTaskDB.DeleteTask(delTask.parentNode.id, onComplete, onError);
+    SoftLogic.UserTaskDB.DeleteTask(delTask.parentNode.id, onComplete, onError);
 }
 
 function onComplete(result) {
     if (result) {
         for (var i in result) {
-            console.log(i + " " + result[i]);
-            AddTaskInContainer(result[i], i, false);
+            AddTaskInContainer(result[i], false);
         }
     }
-    console.log(result);
 }
 
 function onError(error) {
@@ -202,10 +230,11 @@ var priorityObj = {
     highest: "#c24332",
     high: "#ff7664",
     low: "#3add7c",
-    lowest: "2b7a4d",
-}
+    lowest: "2b7a4d"
+};
+
 var statusObj = {
     stopped: "#c24332",
     ['in process']: "#e67e22",
-    complete: "#2ecc71",
-}
+    complete: "#2ecc71"
+};
