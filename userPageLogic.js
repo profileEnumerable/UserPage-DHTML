@@ -14,8 +14,14 @@ $(document).mouseup(function () {
     }
 });
 
+$(document).ready(function () {
+    $('input').keypress(function (e) {
+        return (e.keyCode == 13) ? false : true;
+    });
+});
+
 window.onload = function () {
-    // SoftLogic.UserTaskDB.GetSaveUserTask(onComplete, onError);
+    // SoftLogic.UserTaskDB.GetSaveUserTask(onComplete, onError)
 
     var viewSection = $('#content');
 
@@ -105,7 +111,6 @@ window.onload = function () {
         });
     }
 
-
     $('.design').click(function () {
 
         if (this.parentNode.id === 'priority-container') {
@@ -120,7 +125,8 @@ window.onload = function () {
         }
     });
 
-    $('.input_dotted').keyup(function (event) {
+
+    $('#newTaskText').keyup(function (event) {
         if (event.keyCode === 13) {
             $('#enterHandler').click();
         }
@@ -188,9 +194,9 @@ function AddTaskInContainer(taskObj, saveFlag) {
 
     if (taskObj.TaskText) {
 
-        lastId = taskObj.TaskId;
+        lastId = taskObj.Id;
         readyTampleteTask = document.getElementsByClassName('filledTask')[0].cloneNode(true);
-        readyTampleteTask.setAttribute('id', taskObj.TaskId);
+        readyTampleteTask.setAttribute('id', taskObj.Id);
 
         document.getElementById('taskContainer').appendChild(readyTampleteTask);
         document.getElementsByClassName('taskText')[spanId].innerHTML = taskObj.TaskText;
@@ -198,10 +204,10 @@ function AddTaskInContainer(taskObj, saveFlag) {
         SetPriorityStatus(priorityObj, 'sprint-priority', taskObj, 'PriorityId');
         SetPriorityStatus(statusObj, 'status', taskObj, 'StatusId');
 
-        $('#' + taskObj.TaskId).fadeIn(300);
+        $('#' + taskObj.Id).fadeIn(300);
 
         if (saveFlag) {
-            SoftLogic.UserTaskDB.AddNewTask(taskText, TaskId, onComplete, onError);
+            //SoftLogic.UserTaskDB.AddNewTask(taskText, TaskId, onComplete, onError);
         }
         spanId++;
         document.getElementById('newTaskText').value = null;
@@ -211,7 +217,7 @@ function AddTaskInContainer(taskObj, saveFlag) {
 function DeleteTask(delTask) {
     var del_parentNode = delTask.parentNode.id;
     $('#' + del_parentNode).fadeOut(300);
-    SoftLogic.UserTaskDB.DeleteTask(delTask.parentNode.id, onComplete, onError);
+    //SoftLogic.UserTaskDB.DeleteTask(delTask.parentNode.id, onComplete, onError);
 }
 
 function onComplete(result) {
@@ -238,3 +244,8 @@ var statusObj = {
     ['in process']: "#e67e22",
     complete: "#2ecc71"
 };
+
+
+function buttonCode() {
+    alert("Button code executed.");
+}

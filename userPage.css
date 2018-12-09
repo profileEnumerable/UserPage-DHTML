@@ -463,6 +463,7 @@ input[value="AddToDB"] {
 
 .productItem_in_process {
   width: 100%;
+  height: 325px;
   background-color: #d9d6d6;
   text-align: center;
   position: relative;
@@ -529,7 +530,7 @@ input[value="AddToDB"] {
   position: relative;
   top: 0;
   width: 100%;
-  min-height: 85%;
+  height: 235px;
   margin: 0 auto;
   border-radius: 5px;
 }
@@ -539,7 +540,9 @@ input[value="AddToDB"] {
   height: 100%;
   background-color: #ebf2f9;
   position: absolute;
-  border: 3px dashed #3b73af;
+ /* border: 3px dashed #3b73af;*/
+ border: 3px dashed #3b73af;
+  box-sizing: border-box;
   top: 0;
   z-index: 100;
 }
@@ -623,4 +626,44 @@ input[value="AddToDB"] {
 
   .flex_item div:last-child {
       margin-right: 0;
+  }
+
+  .sprint-backlog-item{
+    display: grid;
+    grid-template-columns: 30fr 30fr 1fr;
+  }
+
+  .dropp-sprint-task{
+    display: flex;    
+    border: 3px dashed #63948c;
+    text-align: center;
+    grid-column: 1/4;
+    min-height: 150px;
+  }
+
+  .dropp-sprint-task span{
+    margin: auto;
+    color: #cacaca;
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .sprint-name{
+    font-size: 27px;
+  }
+
+  .counter-esimate{
+    display: flex;  
+  }
+
+  .counter-esimate span{
+    margin: 5px;
+    width: 20px;
+    height: 20px;;
+    text-align: center;
+    border-radius: 100%;
+  }
+
+  .count-task{
+    color: #63948c;
   }

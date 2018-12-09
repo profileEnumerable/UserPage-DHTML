@@ -1,9 +1,8 @@
-<!doctype html>
+<!Doctype html>
 <html lang="en">
 
 <head>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script type="text/javascript" src="jquery.js"></script>
     <meta charset="utf-8">
     <title>draggable demo</title>
     <style>
@@ -39,29 +38,44 @@
     </div>
     <script>
 
-        $(function () {
+        // $(function () {
 
-            $(".drag").draggable({
+        //     $(".drag").draggable({
 
-                start: function () { $('.dragX').text('In process') }
-                ,
-                stop: function () { $('.dragX').text('stop') }
-            })
+        //         start: function () { $('.dragX').text('In process') }
+        //         ,
+        //         stop: function () { $('.dragX').text('stop') }
+        //     })
 
-            $('.drop').droppable({
+        //     $('.drop').droppable({
 
-                drop: function () {
+        //         drop: function () {
 
-                    var dragElement = document.getElementsByClassName('drag')[0];
+        //             var dragElement = document.getElementsByClassName('drag')[0];
 
-                    dragElement.style.left = this.getBoundingClientRect().left + 'px';
-                    dragElement.style.top = 40 + 'px';
-                    
-                }
-            })
-        })
+        //             dragElement.style.left = this.getBoundingClientRect().left + 'px';
+        //             dragElement.style.top = 40 + 'px';
 
+        //         }
+        //     })
+        // })
+
+
+        
+        function buttonCode() {
+                alert("Button code executed.");
+            }
+            
     </script>
+
+
+
+    Username:<input id="username" type="text"><br>
+    Password:&nbsp;<input id="pw" type="password"><br>
+    <button id="myButton" onclick="buttonCode()">Submit</button>
+
+
+
 
 </body>
 

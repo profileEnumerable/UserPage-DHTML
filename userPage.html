@@ -7,20 +7,19 @@
     <meta charset="UTF-8" />
     <title>SoftLogic</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href=" userPage.css" />
-    <link rel="stylesheet" type="text/css" href=" normalize.css" />
+    <link rel="stylesheet" type="text/css" href="userPage.css" />
+    <link rel="stylesheet" type="text/css" href="normalize.css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script type="text/javascript" src=" jquery.js"></script>
-    <script type="text/javascript" src=" userPageLogic.js"></script>
+    <script type="text/javascript" src="userPageLogic.js"></script>
+    <script type="text/javascript" src="jquery.js"></script>
 </head>
-
 <body>
     <form id="form1" runat="server">
-        <asp:ScriptManager runat="server">
+        <!-- <asp:ScriptManager runat="server">
             <Services>
                 <asp:ServiceReference Path="~/UserTaskDB.asmx" />
             </Services>
-        </asp:ScriptManager>
+        </asp:ScriptManager> -->
         <header>
             <div class="container">
                 <div class="header-main">
@@ -53,6 +52,35 @@
                         <div class="content">
                             <div class="container">
                                 <div class="main">
+
+                                    <div class="sprint-backlog-item">
+
+                                        <div class="count-task">
+
+                                            <button>hidden</button> <span>0</span> items
+
+                                        </div>
+
+                                        <div class="sprint-name">Sprint Name items</div>
+                                        <div class="counter-esimate">
+                                            <span style="background-color: #c24332;">0</span>
+                                            <span style="background-color: #eb984e;">0</span>
+                                            <span style="background-color: #58be8d;">0</span>
+                                            <button>setting</button>
+                                            <button>start sprint</button>
+                                        </div>
+
+                                        <div class="dropp-sprint-task">
+                                            <span>Grab items here</span>
+                                        </div>
+
+                                        <div class="start-edit-sprint">
+
+                                            <div class="start=sprint"></div>
+                                            <div></div>
+
+                                        </div>
+                                    </div>
                                     <h1>Backlog</h1>
                                     <div class="main-task">
                                         <div class="task">Task</div>
@@ -197,6 +225,8 @@
                 <div class="status-button design" style="background-color:  #3add7c;"><span><img src="low.png"></span>low</div>
                 <div class="status-button design" style="background-color:  #2b7a4d;"><span><img src="lowest.png"></span>lowest</div>
             </div>
+
+
         </main>
     </form>
 </body>
