@@ -13,6 +13,7 @@
     <script type="text/javascript" src="userPageLogic.js"></script>
     <script type="text/javascript" src="jquery.js"></script>
 </head>
+
 <body>
     <form id="form1" runat="server">
         <!-- <asp:ScriptManager runat="server">
@@ -55,13 +56,13 @@
 
                                     <div class="sprint-backlog-item">
 
+                                        <input type="checkbox" name="sprint-control" id="tasks" class="hidden-tasks">
+
                                         <div class="count-task">
-
-                                            <button>hidden</button> <span>0</span> items
-
-                                        </div>
+                                            <label for="tasks">hidden</label>  </div>
 
                                         <div class="sprint-name">Sprint Name items</div>
+
                                         <div class="counter-esimate">
                                             <span style="background-color: #c24332;">0</span>
                                             <span style="background-color: #eb984e;">0</span>
@@ -70,7 +71,7 @@
                                             <button>start sprint</button>
                                         </div>
 
-                                        <div class="dropp-sprint-task">
+                                        <div class="dropp-sprint-task hidden-area">
                                             <span>Grab items here</span>
                                         </div>
 
@@ -78,56 +79,121 @@
 
                                             <div class="start=sprint"></div>
                                             <div></div>
-
-                                        </div>
-                                    </div>
-                                    <h1>Backlog</h1>
-                                    <div class="main-task">
-                                        <div class="task">Task</div>
-                                        <div class="person">Person</div>
-                                        <div class="priority">Priority</div>
-                                        <div class="status">Status</div>
-                                    </div>
-                                </div>
-                                <section>
-                                    <div class="main-task filledTask" style="display: none;">
-                                        <input type="button" id="del_task" value="del" style="display: none;">
-                                        <label for="del_task" onclick="DeleteTask(this)"><img class="del_task" src=" del_task.png"></label>
-                                        <div class="sprint-task">
-                                            <span class="taskText" style="width: 100px;"></span>
-                                        </div>
-                                        <div class="position_item">
-                                            <div class="person bg_person">Person</div>
-                                            <div class="sprint-priority bg_priority" onclick="setPriority(this)">Add</div>
-                                            <div class="status bg_task" onclick="setStatus(this)">Add</div>
                                         </div>
                                     </div>
 
-                                    <div class="main-sprint">
+                                    
+                                    <div class="sprint-backlog-item">
 
-                                        <div id="taskContainer">
+                                        <input type="checkbox" name="sprint-control" id="tasks1" class="hidden-tasks">
+
+                                        <div class="count-task">
+                                            <label for="tasks1">hidden</label>  </div>
+
+                                        <div class="sprint-name">Sprint Name items</div>
+
+                                        <div class="counter-esimate">
+                                            <span style="background-color: #c24332;">0</span>
+                                            <span style="background-color: #eb984e;">0</span>
+                                            <span style="background-color: #58be8d;">0</span>
+                                            <button>setting</button>
+                                            <button>start sprint</button>
                                         </div>
 
-                                        <div class="main-task" id="userTask" style="display: none; ">
-                                            <input value="AddToDB" id="enterHandler" onclick="AddInDB()" type="button"
-                                                style="display: none;">
-                                            <label for="enterHandler"><img class="enterHandler" src=" add_task.png"></label>
-                                            <div class="sprint-task">
-                                                <input id="newTaskText" type="text" class="input_dotted">
-                                            </div>
+                                        <div class="dropp-sprint-task hidden-area">
+                                            <span>Grab items here</span>
+                                        </div>
+
+                                        <div class="start-edit-sprint">
+
+                                            <div class="start=sprint"></div>
+                                            <div></div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="sprint-backlog-item">
+
+                                        <input type="checkbox" name="sprint-control" id="tasks2" class="hidden-tasks">
+
+                                        <div class="count-task">
+                                            <label for="tasks2">hidden</label>  </div>
+
+                                        <div class="sprint-name">Sprint Name items</div>
+
+                                        <div class="counter-esimate">
+                                            <span style="background-color: #c24332;">0</span>
+                                            <span style="background-color: #eb984e;">0</span>
+                                            <span style="background-color: #58be8d;">0</span>
+                                            <button>setting</button>
+                                            <button>start sprint</button>
+                                        </div>
+
+                                        <div class="dropp-sprint-task hidden-area">
+                                            <span>Grab items here</span>
+                                        </div>
+
+                                        <div class="start-edit-sprint">
+
+                                            <div class="start=sprint"></div>
+                                            <div></div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="hidden-area">
+                                        <div class="main-task">
+                                            <div class="task">Task</div>
                                             <div class="person">Person</div>
-                                            <div class="sprint-priority">Priority</div>
+                                            <div class="priority">Priority</div>
                                             <div class="status">Status</div>
                                         </div>
-
-                                        <input type="button" id="addTask" onclick="$('#userTask').fadeIn(300)" value="AddTask"
-                                            style="display: none;" />
-                                        <label for="addTask"><img class="add_task" src="add_task.png" /></label>
-                                        <input type="button" id="cancel_task" onclick="$('#userTask').fadeOut(300);"
-                                            value="Cancel" style="display: none;" />
-                                        <label for="cancel_task"><img src="cancel_task.png" /></label>
                                     </div>
-                                </section>
+                                </div>
+
+                                
+
+                                <div class="hidden-area">
+                                    <section>
+                                        <div class="main-task filledTask" style="display: none;">
+                                            <input type="button" id="del_task" value="del" style="display: none;">
+                                            <label for="del_task" onclick="DeleteTask(this)"><img class="del_task" src=" del_task.png"></label>
+                                            <div class="sprint-task">
+                                                <span class="taskText" style="width: 100px;"></span>
+                                            </div>
+                                            <div class="position_item">
+                                                <div class="person bg_person">Person</div>
+                                                <div class="sprint-priority bg_priority" onclick="setPriority(this)">Add</div>
+                                                <div class="status bg_task" onclick="setStatus(this)">Add</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="main-sprint">
+
+                                            <div id="taskContainer">
+                                            </div>
+
+                                            <div class="main-task" id="userTask" style="display: none; ">
+                                                <input value="AddToDB" id="enterHandler" onclick="AddInDB()" type="button"
+                                                    style="display: none;">
+                                                <label for="enterHandler"><img class="enterHandler" src=" add_task.png"></label>
+                                                <div class="sprint-task">
+                                                    <input id="newTaskText" type="text" class="input_dotted">
+                                                </div>
+                                                <div class="person">Person</div>
+                                                <div class="sprint-priority">Priority</div>
+                                                <div class="status">Status</div>
+                                            </div>
+
+                                            <input type="button" id="addTask" onclick="$('#userTask').fadeIn(300)"
+                                                value="AddTask" style="display: none;" />
+                                            <label for="addTask"><img class="add_task" src="add_task.png" /></label>
+                                            <input type="button" id="cancel_task" onclick="$('#userTask').fadeOut(300);"
+                                                value="Cancel" style="display: none;" />
+                                            <label for="cancel_task"><img src="cancel_task.png" /></label>
+                                        </div>
+                                    </section>
+                                </div>
                             </div>
                         </div>
                     </a>

@@ -667,3 +667,27 @@ input[value="AddToDB"] {
   .count-task{
     color: #63948c;
   }
+
+   [type ="checkbox"]{
+     display: none;
+  }
+
+  .hidden-tasks:checked ~ div:nth-child(5){
+    display: none;    
+  }
+
+  
+  .count-task label{
+    position: absolute;
+    width: 50px;
+    height: 20px;
+    transition: 3s ease;
+    -moz-transition: 0.5s ease;
+  }
+
+  .hidden-tasks:checked ~ .count-task label{    
+    -moz-transform: rotate(0.5turn);
+    transform: rotate(0.5turn);
+    display: block;   
+  }
+
