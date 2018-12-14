@@ -59,88 +59,59 @@
                                         <input type="checkbox" name="sprint-control" id="tasks" class="hidden-tasks">
 
                                         <div class="count-task">
-                                            <label for="tasks">hidden</label>  </div>
+                                            <label class="arrow-down" for="tasks"><img src="down-arrow.svg" alt="down-arrow"></label>
+                                            <span class="count-task-item">0 item(s)</span>
+                                        </div>
 
                                         <div class="sprint-name">Sprint Name items</div>
 
                                         <div class="counter-esimate">
-                                            <span style="background-color: #c24332;">0</span>
-                                            <span style="background-color: #eb984e;">0</span>
-                                            <span style="background-color: #58be8d;">0</span>
-                                            <button>setting</button>
-                                            <button>start sprint</button>
+                                            <div class="esimate-flex"> <span style="background-color: #c24332;">0</span>
+                                                <span style="background-color: #eb984e;">0</span>
+                                                <span style="background-color: #58be8d;">0</span></div>
+                                            <div class="counter-esimate-btn"><img src="Group 3.png"></div>
+                                            <div class="counter-esimate-btn-start">
+                                                <div class="start">start</div>
+                                                <div>sprint</div>
+                                            </div>
+                                            <!-- <div class="start-edit-sprint">
+
+                                                <div class="start=sprint"></div>
+                                                <div></div>
+                                            </div> -->
                                         </div>
 
                                         <div class="dropp-sprint-task hidden-area">
                                             <span>Grab items here</span>
                                         </div>
+                                    </div>
 
-                                        <div class="start-edit-sprint">
+                                    <div class="back">
+                                        <div class="count-task">
 
-                                            <div class="start=sprint"></div>
-                                            <div></div>
+                                            <label class="arrow-down" for="backlogTrigger"><img src="down-arrow.svg"
+                                                    alt="down-arrow">
+                                            </label>
+                                            <span class="count-task-item">3 item(s)</span>
+                                        </div>
+                                        <div class="backlog-item">
+                                            <div class="count-task">
+                                            </div>
+                                            <div class="sprint-name"><span>Backlog items</span></div>
+
+                                            <div class="counter-esimate">
+                                                <div class="esimate-flex esimate-line"><span style="background-color: #c24332;">0</span>
+                                                    <span style="background-color: #eb984e;">0</span>
+                                                    <span style="background-color: #58be8d;">0</span></div>
+                                                <button class="create-sprint"><span><img src="create sprint.png"></span>Create
+                                                    sprint</button>
+                                            </div>
+
                                         </div>
                                     </div>
 
+                                    <input type="checkbox" id="backlogTrigger" class="hidden-tasks">
                                     
-                                    <div class="sprint-backlog-item">
-
-                                        <input type="checkbox" name="sprint-control" id="tasks1" class="hidden-tasks">
-
-                                        <div class="count-task">
-                                            <label for="tasks1">hidden</label>  </div>
-
-                                        <div class="sprint-name">Sprint Name items</div>
-
-                                        <div class="counter-esimate">
-                                            <span style="background-color: #c24332;">0</span>
-                                            <span style="background-color: #eb984e;">0</span>
-                                            <span style="background-color: #58be8d;">0</span>
-                                            <button>setting</button>
-                                            <button>start sprint</button>
-                                        </div>
-
-                                        <div class="dropp-sprint-task hidden-area">
-                                            <span>Grab items here</span>
-                                        </div>
-
-                                        <div class="start-edit-sprint">
-
-                                            <div class="start=sprint"></div>
-                                            <div></div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="sprint-backlog-item">
-
-                                        <input type="checkbox" name="sprint-control" id="tasks2" class="hidden-tasks">
-
-                                        <div class="count-task">
-                                            <label for="tasks2">hidden</label>  </div>
-
-                                        <div class="sprint-name">Sprint Name items</div>
-
-                                        <div class="counter-esimate">
-                                            <span style="background-color: #c24332;">0</span>
-                                            <span style="background-color: #eb984e;">0</span>
-                                            <span style="background-color: #58be8d;">0</span>
-                                            <button>setting</button>
-                                            <button>start sprint</button>
-                                        </div>
-
-                                        <div class="dropp-sprint-task hidden-area">
-                                            <span>Grab items here</span>
-                                        </div>
-
-                                        <div class="start-edit-sprint">
-
-                                            <div class="start=sprint"></div>
-                                            <div></div>
-                                        </div>
-                                    </div>
-
-
                                     <div class="hidden-area">
                                         <div class="main-task">
                                             <div class="task">Task</div>
@@ -150,9 +121,8 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 
-
+                                
                                 <div class="hidden-area">
                                     <section>
                                         <div class="main-task filledTask" style="display: none;">
