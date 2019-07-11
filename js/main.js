@@ -1,3 +1,15 @@
+var priorityObj = {
+  highest: "#c24332",
+  high: "#ff7664",
+  low: "#3add7c",
+  lowest: "2b7a4d"
+};
+
+var statusObj = {
+  stopped: "#c24332",
+  ["in process"]: "#e67e22",
+  complete: "#2ecc71"
+};
 var priority_Node = null;
 var status_Node = null;
 var spanId = 1;
@@ -63,12 +75,11 @@ $(".design").click(function() {
   }
 });
 
-$("#newTaskText").keyup(function(event) {  
+$("#newTaskText").keyup(function(event) {
   if (event.keyCode === 13) {
     $("#enterHandler").click();
   }
 });
-
 
 $(".create-sprint").click(function(event) {
   if (event.screenX != 0) {
@@ -98,11 +109,9 @@ $(".create-sprint").click(function(event) {
   }
 });
 
-
 $(".sprint-dropp-area").bind("DOMSubtreeModified", function(event) {
   //console.log(event.originalEvent.target);
 });
-
 
 function ResetPosition(obj) {
   obj.style.left = 0;
@@ -267,6 +276,7 @@ function AddTaskInContainer(taskObj, saveFlag) {
     readyTampleteTask.setAttribute("id", taskObj.Id);
 
     document.getElementById("taskContainer").appendChild(readyTampleteTask);
+
     document.getElementsByClassName("taskText")[
       spanId
     ].innerHTML = trimedTaskText;
@@ -295,27 +305,12 @@ function DeleteTask(delTask) {
   $("#" + del_parentNode).remove();
 
   $(".backlog-counter")[0].innerHTML = GetCurrentCountTask("taskContainer");
-
-  //SoftLogic.UserTaskDB.DeleteTask(delTask.parentNode.id, onComplete, onError); check this
 }
 
-function onComplete(result) {
-  console.log(result);
-}
-
-function onError(error) {
-  alert(error._massege);
-}
-
-var priorityObj = {
-  highest: "#c24332",
-  high: "#ff7664",
-  low: "#3add7c",
-  lowest: "2b7a4d"
-};
-
-var statusObj = {
-  stopped: "#c24332",
-  ["in process"]: "#e67e22",
-  complete: "#2ecc71"
-};
+$(".sort-tasks").click(function name(params) {
+  taskManagment.sortTask(
+    "#taskContainer",
+    ".sprint-priority",
+    priorityObj
+  );
+});
