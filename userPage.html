@@ -7,25 +7,29 @@
     <meta charset="UTF-8" />
     <title>SoftLogic</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="userPage.css" />
-    <link rel="stylesheet" type="text/css" href="normalize.css" />
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script type="text/javascript" src="userPageLogic.js"></script>
-    <script type="text/javascript" src="jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/userPage.css" />
+    <link rel="stylesheet" type="text/css" href="styles/normalize.css" />
+    <script type="text/javascript" defer src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script defer src="js/jquery.js"></script>
+    <script src="js/Prod-Back/task-management.js" defer></script>
+    <script type="text/javascript" defer src="js/main.js"></script>
+    <script src="js/Prod-Back/sprint-management.js" defer></script>
 </head>
 
 <body>
     <form id="form1" runat="server">
-        <!-- <asp:ScriptManager runat="server">
+        <asp:ScriptManager runat="server">
             <Services>
                 <asp:ServiceReference Path="~/UserTaskDB.asmx" />
             </Services>
-        </asp:ScriptManager> -->
+        </asp:ScriptManager>
+
         <header>
             <div class="container">
                 <div class="header-main">
                     <div class="header-logo">
-                        <span><img src=" logo.PNG" width="100" height="60" alt="logo"></span>
+                        <span>
+                            <img src="images/global/logo.PNG" width="100" height="60" alt="logo"></span>
                     </div>
                     <div class="header-user">
                         <div class="header-link">
@@ -52,66 +56,131 @@
                         <li>Product Backlog</li>
                         <div class="content">
                             <div class="container">
-                                <div class="main">
 
-                                    <div class="sprint-backlog-item">
+                                <div class="main-task filledTask sprint-dragg-task" onmousedown="sprintDragDrop()"
+                                    style="display: none;">
+                                    <input type="button" id="del_task" value="del" style="display: none;">
+                                    <label for="del_task" onclick="DeleteTask(this)">
+                                        <img class="del_task" src="images/prod-back/del_task.png"></label>
+                                    <div class="sprint-task">
+                                        <span class="taskText"></span>
+                                    </div>
+                                    <div class="position_item">
+                                        <div class="person bg_person">Person</div>
+                                        <div class="sprint-priority bg_priority" onclick="setPriority(this)">Add</div>
+                                        <div class="status bg_task" onclick="setStatus(this)">Add</div>
+                                    </div>
+                                </div>
 
-                                        <input type="checkbox" name="sprint-control" id="tasks" class="hidden-tasks">
+                                <div class="sprint-backlog-item" style="display: none;">
 
-                                        <div class="count-task">
-                                            <label class="arrow-down" for="tasks"><img src="down-arrow.svg" alt="down-arrow"></label>
-                                            <span class="count-task-item">0 item(s)</span>
+                                    <input type="checkbox" name="sprint-control" id="hiddenSpr" class="hidden-tasks">
+
+                                    <div class="count-task">
+                                        <label class="arrow-down" for="hiddenSpr">
+                                            <img src="images/prod-back/down-arrow.svg" alt="down-arrow"></label>
+                                        <span class="count-task-item">0 item(s)</span>
+                                    </div>
+
+                                    <div class="sprint-name">Sprint Name items</div>
+
+                                    <div class="counter-esimate">
+                                        <div class="esimate-flex">
+                                            <span style="background-color: #c24332;">0</span>
+                                            <span style="background-color: #eb984e;">0</span>
+                                            <span style="background-color: #58be8d;">0</span>
                                         </div>
-
-                                        <div class="sprint-name">Sprint Name items</div>
-
-                                        <div class="counter-esimate">
-                                            <div class="esimate-flex"> <span style="background-color: #c24332;">0</span>
-                                                <span style="background-color: #eb984e;">0</span>
-                                                <span style="background-color: #58be8d;">0</span></div>
-                                            <div class="counter-esimate-btn"><img src="Group 3.png"></div>
-                                            <div class="counter-esimate-btn-start">
-                                                <div class="start">start</div>
-                                                <div>sprint</div>
-                                            </div>
-                                            <!-- <div class="start-edit-sprint">
+                                        <div class="counter-esimate-btn">
+                                            <img src="images/prod-back/Group 3.png">
+                                        </div>
+                                        <div class="counter-esimate-btn-start">
+                                            <div class="start">start</div>
+                                            <div>sprint</div>
+                                        </div>
+                                        <!-- <div class="start-edit-sprint">
 
                                                 <div class="start=sprint"></div>
                                                 <div></div>
                                             </div> -->
-                                        </div>
-
-                                        <div class="dropp-sprint-task hidden-area">
-                                            <span>Grab items here</span>
-                                        </div>
                                     </div>
 
-                                    <div class="back">
-                                        <div class="count-task">
+                                    <div class="sprint-dropp-area dropp-sprint-task hidden-area">
+                                        <span class="hintPlaceDrop">Grap items here</span>
 
-                                            <label class="arrow-down" for="backlogTrigger"><img src="down-arrow.svg"
-                                                    alt="down-arrow">
-                                            </label>
-                                            <span class="count-task-item">3 item(s)</span>
-                                        </div>
-                                        <div class="backlog-item">
+                                    </div>
+                                </div>
+
+                                <div class="main">
+
+                                    <div id="sprint-backlog-container">
+
+                                        <div class="sprint-backlog-item" id="sprint-item-1">
+
+                                            <input type="checkbox" name="sprint-control" id="tasks"
+                                                class="hidden-tasks">
+
                                             <div class="count-task">
+                                                <label class="arrow-down" for="tasks">
+                                                    <img src=" down-arrow.svg" alt="down-arrow"></label>
+                                                <span class="count-task-item">0 item(s)</span>
                                             </div>
-                                            <div class="sprint-name"><span>Backlog items</span></div>
+
+                                            <div class="sprint-name">sprint-item-1</div>
 
                                             <div class="counter-esimate">
-                                                <div class="esimate-flex esimate-line"><span style="background-color: #c24332;">0</span>
+                                                <div class="esimate-flex">
+                                                    <span style="background-color: #c24332;">0</span>
                                                     <span style="background-color: #eb984e;">0</span>
-                                                    <span style="background-color: #58be8d;">0</span></div>
-                                                <button class="create-sprint"><span><img src="create sprint.png"></span>Create
-                                                    sprint</button>
+                                                    <span style="background-color: #58be8d;">0</span>
+                                                </div>
+                                                <div class="counter-esimate-btn">
+                                                    <img src=" Group 3.png">
+                                                </div>
+                                                <div class="counter-esimate-btn-start">
+                                                    <div class="start">start</div>
+                                                    <div>sprint</div>
+                                                </div>
+                                                <!-- <div class="start-edit-sprint">
+
+                                                <div class="start=sprint"></div>
+                                                <div></div>
+                                            </div> -->
                                             </div>
 
+                                            <div class="sprint-dropp-area dropp-sprint-task hidden-area">
+                                                <span class="hintPlaceDrop">Grap items here</span>
+                                            </div>
                                         </div>
+
                                     </div>
 
                                     <input type="checkbox" id="backlogTrigger" class="hidden-tasks">
-                                    
+
+                                    <div class="count-task">
+                                        <label class="arrow-down" for="backlogTrigger">
+                                            <img src=" down-arrow.svg" alt="down-arrow">
+                                        </label>
+                                        <span class="count-task-item backlog-counter">0 item(s)</span>
+                                    </div>
+                                    <div class="backlog-item">
+                                        <div class="count-task">
+                                        </div>
+                                        <div class="sprint-name"><span>Backlog items</span></div>
+
+                                        <div class="counter-esimate">
+                                            <div class="esimate-flex esimate-line">
+                                                <span style="background-color: #c24332;">0</span>
+                                                <span style="background-color: #eb984e;">0</span>
+                                                <span style="background-color: #58be8d;">0</span>
+                                            </div>
+                                            <button class="create-sprint">
+                                                <span>
+                                                    <img src="images/prod-back/create sprint.png"></span>Create
+                                                sprint</button>
+                                        </div>
+                                    </div>
+                                    <input class="sort-tasks" type="button" value="Sort by Priority">
+
                                     <div class="hidden-area">
                                         <div class="main-task">
                                             <div class="task">Task</div>
@@ -120,49 +189,40 @@
                                             <div class="status">Status</div>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                
-                                <div class="hidden-area">
-                                    <section>
-                                        <div class="main-task filledTask" style="display: none;">
-                                            <input type="button" id="del_task" value="del" style="display: none;">
-                                            <label for="del_task" onclick="DeleteTask(this)"><img class="del_task" src=" del_task.png"></label>
-                                            <div class="sprint-task">
-                                                <span class="taskText" style="width: 100px;"></span>
-                                            </div>
-                                            <div class="position_item">
-                                                <div class="person bg_person">Person</div>
-                                                <div class="sprint-priority bg_priority" onclick="setPriority(this)">Add</div>
-                                                <div class="status bg_task" onclick="setStatus(this)">Add</div>
-                                            </div>
-                                        </div>
 
-                                        <div class="main-sprint">
+                                    <div class="hidden-area">
+                                        <section>
+                                            <div class="main-sprint">
 
-                                            <div id="taskContainer">
-                                            </div>
-
-                                            <div class="main-task" id="userTask" style="display: none; ">
-                                                <input value="AddToDB" id="enterHandler" onclick="AddInDB()" type="button"
-                                                    style="display: none;">
-                                                <label for="enterHandler"><img class="enterHandler" src=" add_task.png"></label>
-                                                <div class="sprint-task">
-                                                    <input id="newTaskText" type="text" class="input_dotted">
+                                                <div id="taskContainer" class="sprint-dropp-area">
                                                 </div>
-                                                <div class="person">Person</div>
-                                                <div class="sprint-priority">Priority</div>
-                                                <div class="status">Status</div>
-                                            </div>
 
-                                            <input type="button" id="addTask" onclick="$('#userTask').fadeIn(300)"
-                                                value="AddTask" style="display: none;" />
-                                            <label for="addTask"><img class="add_task" src="add_task.png" /></label>
-                                            <input type="button" id="cancel_task" onclick="$('#userTask').fadeOut(300);"
-                                                value="Cancel" style="display: none;" />
-                                            <label for="cancel_task"><img src="cancel_task.png" /></label>
-                                        </div>
-                                    </section>
+                                                <div class="main-task" id="userTask" style="display: none;">
+                                                    <input value="AddToDB" id="enterHandler" onclick="AddInDB()"
+                                                        type="button" style="display: none;">
+                                                    <label for="enterHandler">
+                                                        <img class="enterHandler"
+                                                            src="images/prod-back/add_task.png"></label>
+                                                    <div class="sprint-task">
+                                                        <input id="newTaskText" type="text" class="input_dotted">
+                                                    </div>
+                                                    <div class="person">Person</div>
+                                                    <div class="sprint-priority">Priority</div>
+                                                    <div class="status">Status</div>
+                                                </div>
+
+                                                <input type="button" id="addTask" onclick="$('#userTask').fadeIn(300)"
+                                                    value="AddTask" style="display: none;" />
+                                                <label for="addTask">
+                                                    <img class="add_task" src="images/prod-back/add_task.png" /></label>
+                                                <input type="button" id="cancel_task"
+                                                    onclick="$('#userTask').fadeOut(300);" value="Cancel"
+                                                    style="display: none;" />
+                                                <label for="cancel_task">
+                                                    <img src="images/prod-back/cancel_task.png" /></label>
+                                            </div>
+                                        </section>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -182,16 +242,16 @@
                                                 <div class="header_task">
                                                     <div class="id_task"><span>ID</span></div>
                                                     <div class="name_task">Name</div>
-                                                    <div class="close_task"><img src="cancel.svg" /></div>
+                                                    <div class="close_task">
+                                                        <img src="images/prod-back/cancel.svg" />
+                                                    </div>
                                                 </div>
                                                 <div class="main_text">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                        eiusmod
-                                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                        minim veniam,
-                                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                                        commodo
-                                                        consequat.
+                                                    <p>
+                                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                                                        enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                                                        nisi ut aliquip ex ea commodo consequat.
                                                     </p>
                                                 </div>
                                                 <div class="footer_task">
@@ -229,42 +289,55 @@
                             </div>
                         </div>
                     </a>
-
-
-                    <a href="#" class="item">
-                        <li>Burndown chart</li>
-                        <div class="content"></div>
-                    </a>
-
-                    <a href="#" class="item">
-                        <li>Settings</li>
-                        <div class="content">Settings</div>
-                    </a>
-
                 </ul>
             </div>
 
             <section id="content">
-
             </section>
 
-            <div id="status-container" class="task-settings" style="display: none; position: absolute; top: 0;">
-                <div class="status-button design" style="background-color:#c24332;">
-                    <span><img src="stopped.png"></span>stopped</div>
-                <div class="status-button design" style="background-color:  #e67e22;"><span><img src="in process.png">inprocess</div>
-                <div class="status-button design" style="background-color:  #2ecc71;"><span><img src="complete.png">complete</div>
+            <div id="status-container" class="task-settings" style="z-index:500000; display: none; position: absolute;">
+                <div class="status-button design" style="background-color: #c24332;">
+                    <span>
+                        <img src="images/prod-back/stopped.png"></span>stopped
+                </div>
+                <div class="status-button design" style="background-color: #e67e22;">
+                    <span>
+                        <img src="images/prod-back/in process.png">inprocess
+                </div>
+                <div class="status-button design" style="background-color: #2ecc71;">
+                    <span>
+                        <img src="images/prod-back/complete.png">complete
+                </div>
             </div>
 
-            <div id="priority-container" class="task-settings" style="display:none; position: absolute;">
-                <div class="status-button design" style="background-color:  #c24332; "><span><img src="highest.png"></span>highest</div>
-                <div class="status-button design" style="background-color:  #ff7664;"><span><img src="high.png"></span>high</div>
-                <div class="status-button design" style="background-color:  #3add7c;"><span><img src="low.png"></span>low</div>
-                <div class="status-button design" style="background-color:  #2b7a4d;"><span><img src="lowest.png"></span>lowest</div>
+
+            <div id="priority-container" class="task-settings"
+                style="z-index:500000; display: none; position: absolute;">
+                <div class="status-button design" style="background-color: #c24332;">
+                    <span>
+                        <img src="images/prod-back/highest.png"></span>highest
+                </div>
+                <div class="status-button design" style="background-color: #ff7664;">
+                    <span>
+                        <img src="images/prod-back/high.png"></span>high
+                </div>
+                <div class="status-button design" style="background-color: #3add7c;">
+                    <span>
+                        <img src="images/prod-back/low.png"></span>low
+                </div>
+                <div class="status-button design" style="background-color: #2b7a4d;">
+                    <span>
+                        <img src="images/prod-back/lowest.png"></span>lowest
+                </div>
             </div>
 
-
+            <div style="display:none; position:absolute;" id="sprint-managment">
+                <div>Move sprint up</div>
+                <div>Edit sprint</div>
+                <div id="delete-sprint">Delete sprint</div>
+            </div>
         </main>
     </form>
 </body>
 
-</html>
+<!-- </html> -->

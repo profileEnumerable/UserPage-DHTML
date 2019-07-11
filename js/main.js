@@ -63,11 +63,12 @@ $(".design").click(function() {
   }
 });
 
-$("#newTaskText").keyup(function(event) {
+$("#newTaskText").keyup(function(event) {  
   if (event.keyCode === 13) {
     $("#enterHandler").click();
   }
 });
+
 
 $(".create-sprint").click(function(event) {
   if (event.screenX != 0) {
@@ -97,16 +98,11 @@ $(".create-sprint").click(function(event) {
   }
 });
 
-$("#delete-sprint").click(function() {
-  $("#" + currentSprint.id).fadeOut(300);
-  $("#" + currentSprint.id).remove();
-});
 
 $(".sprint-dropp-area").bind("DOMSubtreeModified", function(event) {
   //console.log(event.originalEvent.target);
 });
 
-var currentSprint;
 
 function ResetPosition(obj) {
   obj.style.left = 0;
@@ -199,21 +195,6 @@ function sprintDragDrop() {
       this.appendChild(dragSprintTask);
     }
   });
-}
-
-function managmentSprint(event) {
-  var sprintConfig = document.getElementById("sprint-managment");
-
-  var positionSprConf = event.getBoundingClientRect();
-
-  sprintConfig.style.left = positionSprConf.left - 40 + "px";
-  sprintConfig.style.top = positionSprConf.top + 50 + "px";
-
-  $("#sprint-managment").fadeIn(300);
-
-  var managmentBlock = event.parentNode;
-
-  currentSprint = managmentBlock.parentNode;
 }
 
 function AddInDB() {
